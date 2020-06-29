@@ -4,14 +4,14 @@ window.addEventListener("load", function(){
     if (saved){
         document.body.style.backgroundColor = saved[1];
         document.body.style.fontSize = saved[0]+"px";
-    }}); //если при загрузки есть куки
+    }});
 
 document.getElementById("saveButton").addEventListener("click", function () {
     let selectedColor = getElement("color");
     let fontSize = document.getElementById("num").value;
     document.cookie = "page-color=" + encodeURIComponent(selectedColor);
     document.cookie = "font-size=" + encodeURIComponent(fontSize);
-    document.body.style.background = selectedColor; //чтобы сразу
+    document.body.style.background = selectedColor;
     document.body.style.fontSize = fontSize+"px";
     console.log(selectedColor);
     console.log(document.getElementById("num").value);
@@ -26,7 +26,7 @@ function getElement(name) {
 let arr = [];
 function findCookieValue(cookieName, xSize) {
     let allcookies = document.cookie;
-    let pos = allcookies.indexOf(cookieName + "="); //нашло на каком инексе пейдж-колор=
+    let pos = allcookies.indexOf(cookieName + "=");
     let posSize = allcookies.indexOf(xSize + "=");
     if (posSize !== 1){
         let startSize = posSize + xSize.length + 1;
@@ -37,12 +37,12 @@ function findCookieValue(cookieName, xSize) {
         arr.push(valueSize);
         console.log(valueSize);
     }
-    // Если cookie с указанным именем найден, извлечь его значения.
+
     if (pos !== -1) {
-        let start = pos + cookieName.length + 1; //выделили всб строку куки до пейдж-колор= что бы взять значения потом
-        let end = allcookies.indexOf(";", start); //не будет точки с запятой если запись последняя
-        if (end === -1) end = allcookies.length; //находим где конец значений
-        let value = allcookies.substring(start, end); //от начала до конца строку віделили со значением
+        let start = pos + cookieName.length + 1;
+        let end = allcookies.indexOf(";", start);
+        if (end === -1) end = allcookies.length;
+        let value = allcookies.substring(start, end);
         value = decodeURIComponent(value);
         arr.push(value);
         return arr;
